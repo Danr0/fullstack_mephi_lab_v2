@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  application:
+    build: ./
+    image: web_development_docker_application
+    command: npm run start.dev
+    depends_on:
+      - database
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/home/nodeApp
+    links:
+      - "database:db"
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=users
+      - POSTGRES_PASSWORD=1234
+    expose:
+      - 5432
+    volumes:
+      - app-db:/var/lib/postgresql/data
+
+volumes:
+  app-db:
+

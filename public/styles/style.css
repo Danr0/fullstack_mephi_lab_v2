@@ -1,0 +1,358 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #C3C9E9;
+
+    font-family: sans-serif;
+}
+
+/*
+    Color palette
+
+    #C3C9E9 - Periwinkle Crayola
+
+    #6C91C2 - Blue Gray
+
+    #373F47 - Charcoal
+
+    #8B8982 - Middle Grey
+
+    #AAABBC - Cadet Blue Crayola
+ */
+
+.wrapper { /* All elements centered from top to bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* TOP MENU */
+
+#menu {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 10vh;
+    width: 100vw;
+}
+
+#menu a {
+    text-decoration: none;
+    color: #373F47;
+    font-size: 32px;
+    width: 200px;
+    text-align: center;
+    font-weight: 700;
+    padding: 14px 20px;
+    text-transform: uppercase;
+
+    transition: .7s ease-in-out;
+}
+
+#menu a:hover {
+    background: #373F47;
+    color: #C3C9E9;
+}
+
+/* TOP MENU END */
+
+/* CONTENT */
+
+.content {
+    min-height: 85vh;
+}
+
+.Hello {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #373F47;
+    width: 80vw;
+    color: #C3C9E9;
+
+}
+
+.Hello img {
+    width: 50%;
+    padding-bottom: 100px;
+}
+
+/* LOGIN FORM */
+
+form {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.login {
+    width: 400px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login h2 {
+    margin: 0 0 50px;
+    padding: 0;
+    color: #C3C9E9;
+    text-align: center;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #C3C9E9;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #C3C9E9;
+    outline: none;
+    background: transparent;
+}
+
+.login .inputBox label {
+    position: relative;
+    top: -64px;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #C3C9E9;
+    pointer-events: none;
+    transition: .5s ease-in-out;
+}
+
+.login .inputBox input:focus ~ label,
+.login .inputBox input:valid ~ label {
+    top: -100px;
+    color: #6C91C2;
+}
+
+.login input[type="submit"] {
+    border: none;
+    outline: none;
+    color: #C3C9E9;
+    background: #373F47;
+    padding: 10px 20px;
+    width: 96px;
+    font-weight: 600;
+
+    transition: .3s ease-in-out;
+
+}
+
+.login input[type="radio"] {
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+
+    border: 3px solid #C3C9E9;
+
+    height: 32px;
+    width: 32px;
+
+    text-align: center;
+    border-radius: 50%;
+
+    transition: .4s ease-in-out;
+}
+
+.login input[type="radio"]:checked {
+    background-color: #C3C9E9;
+}
+
+.login input[type="submit"]:hover {
+    color: #373F47;
+    background: #C3C9E9;
+}
+
+.login .option {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.login .option p {
+    color: #C3C9E9;
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-left: 25px;
+    padding-right: 25px;
+
+    padding-bottom: 25px;
+}
+
+/* LOGIN FORM END */
+
+/* PROFILE CARD */
+
+.profile {
+    width: 80vw;
+    height: 80vh;
+    background-color: #373F47;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.profile_header {
+
+    padding: 60px 40px;
+}
+
+.picture {
+    display: inline-block;
+    padding: 8px;
+    background: linear-gradient(130deg, #C3C9E9, #6C91C2);
+    margin: auto;
+    border-radius: 50%;
+}
+
+
+.picture img {
+    display: block;
+    width: 256px;
+    height: 256px;
+    border-radius: 50%;
+}
+
+.name {
+    color: #C3C9E9;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.gender {
+    color: #C3C9E9;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.phone {
+    color: #C3C9E9;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.description {
+    font-size: 18px;
+    color: #6C91C2;
+}
+
+.profile_buttons a {
+    text-decoration: none;
+    color: #C3C9E9;
+    font-size: 32px;
+    width: 200px;
+    text-align: center;
+    font-weight: 700;
+    padding: 14px 20px;
+    text-transform: uppercase;
+
+    transition: .7s ease-in-out;
+}
+
+.profile_buttons a:hover {
+    background: #C3C9E9;
+    color: #373F47;
+}
+
+/* PROFILE CARD END */
+
+/* CONTENT END */
+
+/* FOOTER */
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #373F47;
+    color: #C3C9E9;
+
+    min-height: 5vh;
+    width: 100vw;
+}
+
+
+.footer .links a {
+    padding: 0px 10px;
+    text-decoration: none;
+    color: #C3C9E9;
+}
+
+.footer .links a:hover {
+    color: #6C91C2;
+}
+
+.footer p {
+    font-size: 12px;
+}
+
+/* FOOTER END */
+
+/* ERROR MESSAGES */
+
+.error_message {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #373F47;
+
+    width: 70vw;
+    height: 70vh;
+}
+
+.error_message a {
+    text-decoration: none;
+    color: #373F47;
+    font-size: 32px;
+    width: 200px;
+    text-align: center;
+    font-weight: 700;
+    padding: 14px 20px;
+    text-transform: uppercase;
+
+    transition: .7s ease-in-out;
+}
+
+.error_message a:hover {
+    background: #373F47;
+    color: #C3C9E9;
+}
+
+.error_message {
+
+}
+
+/* ERROR MESSAGES END */

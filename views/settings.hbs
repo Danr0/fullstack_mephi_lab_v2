@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+{{>header}}
+<body>
+<div class="wrapper">
+    {{>menu}}
+
+    <div class="content">
+        <div class="login">
+            <h2>Change settings</h2>
+            <form action="/settings" method="post">
+
+                <div class="inputBox">
+                    <input type="password" name="password" required="">
+                    <label>Change password</label>
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
+
+            <form action="/settings" method="post">
+
+                <div class="inputBox">
+                    <input type="tel" name="phone_number" required="">
+                    <label>Change phone number</label>
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
+
+            <form action="/settings" method="post">
+
+                <div class="inputBox">
+                    <div class="option">
+                        <p><input type="radio" name="gender" value="male" checked>Male</p>
+                        <p><input type="radio" name="gender" value="female">Female</p>
+                        <p><input type="radio" name="gender" value="wolf">Wolf</p>
+                    </div>
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
+
+            <form action="/settings" method="post">
+
+                <div class="inputBox">
+                    <input type="text" name="description" required="">
+                    <label>Change personal info</label>
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+    </div>
+
+    {{>footer}}
+</div>
+</body>
+</html>
