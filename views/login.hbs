@@ -9,6 +9,11 @@
     <div class="content">
         <div class="login">
             <h2>Login</h2>
+
+            {{#if message}}
+                <h3>{{message}}</h3>
+            {{/if}}
+
             <form action="/login" method="post">
 
                 <div class="inputBox">
@@ -26,6 +31,7 @@
         </div>
 
     </div>
+
 
     {{>footer}}
 </div>

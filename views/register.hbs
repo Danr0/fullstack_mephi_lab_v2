@@ -9,6 +9,9 @@
     <div class="content">
         <div class="login">
             <h2>Register</h2>
+            {{#if message}}
+                <h3>{{message}}</h3>
+            {{/if}}
             <form action="/register" method="post">
 
                 <div class="inputBox">
@@ -26,11 +29,10 @@
                     <label>Phone number</label>
                 </div>
 
-                <div class="inputBox">
+                <div class="inputBox1">
                     <div class="option">
                         <p><input type="radio" name="gender" value="male" checked>Male</p>
                         <p><input type="radio" name="gender" value="female">Female</p>
-                        <p><input type="radio" name="gender" value="wolf">Wolf</p>
                     </div>
                 </div>
 

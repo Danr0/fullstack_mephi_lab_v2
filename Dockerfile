@@ -1,17 +1,17 @@
 FROM node:latest
 
-RUN mkdir -p /home/nodeApp
-WORKDIR /home/nodeApp
+RUN mkdir -p /home/nodeApp2
+WORKDIR /home/nodeApp2
 
-COPY package*.json /home/nodeApp/
+COPY package*.json /home/nodeApp2/
 
-RUN npm install
+RUN npm install && \
+  npm rebuild bcrypt --build-from-source
 
-COPY . /home/nodeApp/
+COPY . /home/nodeApp2/
 
 EXPOSE 3000
 
-CMD ["npm", "rebuild", "bcrypt", "--build-from-source"]
 
 CMD [ "npm", "run", "start.dev" ]
 

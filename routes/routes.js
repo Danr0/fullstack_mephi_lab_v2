@@ -20,9 +20,14 @@ router.get('/', function (req, res) {
 });
 
 router.get('/login', function (req, res) {
-    res.render("login.hbs");
-});
 
+    let message = req.flash();
+
+    res.render("login.hbs", {
+        message: message.error
+    });
+
+});
 router.post('/login', passport.authenticate('login', {
     successRedirect: '/',
     failureRedirect: '/login',
@@ -30,7 +35,11 @@ router.post('/login', passport.authenticate('login', {
 }));
 
 router.get('/register', function (req, res) {
-    res.render("register.hbs");
+    let message = req.flash();
+
+    res.render("register.hbs", {
+        message: message.error
+    });
 });
 
 router.post('/register', passport.authenticate('register', {
@@ -39,21 +48,19 @@ router.post('/register', passport.authenticate('register', {
     failureFlash: true
 }));
 
-router.get('/profile', passport.authenticate('cookie', {
-    failureRedirect: '/login',
-    failureFlash: true
-}), function (req, res) {
-    res.render('profile.hbs', {
-        username: req.user.username,
-        phone: req.user.phone_number,
-        gender: req.user.gender,
-        description: req.user.description
-    })
+router.get('/register', function (req, res) {
+
+    let message = req.flash();
+
+    res.render("register.hbs", {
+        message: message.error
+    });
+
 });
 
 router.get('/settings', passport.authenticate('cookie', {
     failureRedirect: '/login',
-    failureFlash: true
+    failureFlash: {message: "You should authorize to access this page"}
 }), function (req, res) {
     res.render('settings.hbs');
 });

@@ -11,6 +11,7 @@ const sequelize = new Sequelize(settings.database, settings.username, settings.p
 
 const userModel = require('./models/user')(sequelize, Sequelize);
 
+
 async function connectToDatabase() {
     try {
         await sequelize.authenticate();
@@ -49,9 +50,8 @@ async function getUserPassword(username) {
 async function createNewUser(username, password, phone, gender, desc) {
     const hashedPassword = await bcrypt.hash('myPassword', 20);
 
-    let res = await bcrypt.compare(password, hashedPassword);
 
-    if (res) {
+
         let newUser = userModel.build({
             username: username,
             password: hashedPassword,
@@ -60,13 +60,9 @@ async function createNewUser(username, password, phone, gender, desc) {
             description: desc
         });
 
+        console.log(newUser);
 
-        newUser.save().then(() => {
-            console.log("New user added");
-        });
-
-        return newUser;
-    }
+        return await newUser.save();
 
     return undefined;
 
