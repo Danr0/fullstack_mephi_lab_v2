@@ -16,6 +16,7 @@ async function connectToDatabase() {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
+
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
@@ -28,6 +29,7 @@ async function findUser(username) {
         }
     });
 }
+
 
 async function findUserById(id) {
     return await userModel.findOne({
@@ -42,22 +44,28 @@ async function isUserExist(username) {
     return (user !== undefined && user !== null);
 }
 
+async function isUserExistById(id) {
+    let user = await findUserById(id);
+    return (user !== undefined && user !== null);
+}
+
 async function getUserPassword(username) {
     let user = await findUser(username);
     return user.password;
 }
 
-async function createNewUser(username, password, phone, gender, desc) {
-    const hashedPassword = await bcrypt.hash('myPassword', 20);
+async function deleteUserById(id){
+    let user = await findUserById(id);
+    await user.destroy();
+}
 
-
+async function createNewUser(username, password, is_admin=false) {
+    const hashedPassword = await bcrypt.hash(password, 10)
 
         let newUser = userModel.build({
             username: username,
             password: hashedPassword,
-            phone_number: phone,
-            gender: gender,
-            description: desc
+            is_admin: is_admin
         });
 
         console.log(newUser);
@@ -76,25 +84,44 @@ async function updateData(req, res, next) {
     if (body) {
         console.log(body);
         if (body.password) {
+            const hashedPassword = await bcrypt.hash(body.password, 10);
             console.log("Changing password");
-            user.password = body.password;
-        }
-        if (body.phone_number) {
-            console.log("Changing phone");
-            user.phone_number = body.phone_number;
-        }
-        if (body.gender) {
-            user.gender = body.gender;
-        }
-        if (body.description) {
-            user.description = body.description;
+            user.password = hashedPassword;
         }
 
         await user.save();
     }
 
-
     next();
+}
+
+async function updateDataById(id, password) {
+
+    let user = await findUserById(id);
+    console.log(password);
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            console.log("Changing password");
+            user.password = hashedPassword;
+        }
+
+        await user.save();
+
+
+}
+
+
+async function updateAdmin(user){
+    await userModel.update(
+        { is_admin: true },
+        { where: { username: user } }
+    )
+        .then(result =>
+            console.log(result)
+        )
+        .catch(err =>
+            console.log(err)
+        )
 }
 
 exports.connectToDatabase = connectToDatabase;
@@ -106,3 +133,7 @@ exports.User = userModel;
 exports.createNewUser = createNewUser;
 exports.findUserById = findUserById;
 exports.updateData = updateData;
+exports.updateAdmin = updateAdmin;
+exports.deleteUserById = deleteUserById;
+exports.updateDataById = updateDataById;
+exports.isUserExistById = isUserExistById;

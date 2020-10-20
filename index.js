@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 
 const connectToDatabase = require('./database').connectToDatabase;
+const updateAdmin = require('./database').updateAdmin;
 const routes = require("./routes/routes")
 
 const settings = require('./config/settings').settings;
@@ -42,6 +43,7 @@ app.listen(settings.port, () => {
 
     connectToDatabase().then(() => {
         console.log("CONNECTION PHASE ENDED");
+        updateAdmin(settings.admin).then().catch()
     }).catch(e => {
         console.log("CONNECT TO DATABASE : ERROR " + e);
     });

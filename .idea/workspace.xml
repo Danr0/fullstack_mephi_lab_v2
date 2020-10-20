@@ -2,21 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f70e34dc-6277-4d63-9fd1-29df19635b00" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/logger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/20201012172823-create-user.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pass.js" beforeDir="false" afterPath="$PROJECT_DIR$/pass.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/favicon.ico" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/styles/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/error.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/error.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/login.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/footer.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/footer.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/partials/header.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/menu.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/menu.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/profile.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/register.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/settings.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +44,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+    </key>
   </component>
   <component name="RunManager" selected="npm.onlyweb">
     <configuration name="onlyweb" type="js.build_tools.npm" nameIsGenerated="true">
@@ -77,7 +84,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1602534860762</updated>
-      <workItem from="1602534861815" duration="10643000" />
+      <workItem from="1602534861815" duration="12151000" />
+      <workItem from="1603140518070" duration="4639000" />
+      <workItem from="1603146118783" duration="10909000" />
     </task>
     <servers />
   </component>
@@ -93,25 +102,34 @@
       <screen x="0" y="23" width="1440" height="795" />
     </state>
     <state x="436" y="229" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.795@0.23.1440.795" timestamp="1602537662743" />
-    <state width="1419" height="203" key="GridCell.Tab.0.bottom" timestamp="1602583141248">
-      <screen x="0" y="23" width="1440" height="795" />
+    <state width="1419" height="323" key="GridCell.Tab.0.bottom" timestamp="1603182732977">
+      <screen x="0" y="23" width="1440" height="798" />
     </state>
     <state width="1419" height="203" key="GridCell.Tab.0.bottom/0.23.1440.795@0.23.1440.795" timestamp="1602583141248" />
-    <state width="1419" height="203" key="GridCell.Tab.0.center" timestamp="1602583141248">
-      <screen x="0" y="23" width="1440" height="795" />
+    <state width="1419" height="323" key="GridCell.Tab.0.bottom/0.23.1440.798@0.23.1440.798" timestamp="1603182732977" />
+    <state width="1419" height="322" key="GridCell.Tab.0.bottom/0.23.1440.801@0.23.1440.801" timestamp="1602690433523" />
+    <state width="1419" height="323" key="GridCell.Tab.0.center" timestamp="1603182732976">
+      <screen x="0" y="23" width="1440" height="798" />
     </state>
     <state width="1419" height="203" key="GridCell.Tab.0.center/0.23.1440.795@0.23.1440.795" timestamp="1602583141248" />
-    <state width="1419" height="203" key="GridCell.Tab.0.left" timestamp="1602583141247">
-      <screen x="0" y="23" width="1440" height="795" />
+    <state width="1419" height="323" key="GridCell.Tab.0.center/0.23.1440.798@0.23.1440.798" timestamp="1603182732976" />
+    <state width="1419" height="322" key="GridCell.Tab.0.center/0.23.1440.801@0.23.1440.801" timestamp="1602690433521" />
+    <state width="1419" height="323" key="GridCell.Tab.0.left" timestamp="1603182732976">
+      <screen x="0" y="23" width="1440" height="798" />
     </state>
     <state width="1419" height="203" key="GridCell.Tab.0.left/0.23.1440.795@0.23.1440.795" timestamp="1602583141247" />
-    <state width="1419" height="203" key="GridCell.Tab.0.right" timestamp="1602583141248">
-      <screen x="0" y="23" width="1440" height="795" />
+    <state width="1419" height="323" key="GridCell.Tab.0.left/0.23.1440.798@0.23.1440.798" timestamp="1603182732976" />
+    <state width="1419" height="322" key="GridCell.Tab.0.left/0.23.1440.801@0.23.1440.801" timestamp="1602690433521" />
+    <state width="1419" height="323" key="GridCell.Tab.0.right" timestamp="1603182732977">
+      <screen x="0" y="23" width="1440" height="798" />
     </state>
     <state width="1419" height="203" key="GridCell.Tab.0.right/0.23.1440.795@0.23.1440.795" timestamp="1602583141248" />
-    <state x="421" y="175" width="598" height="490" key="find.popup" timestamp="1602570241989">
-      <screen x="0" y="23" width="1440" height="795" />
+    <state width="1419" height="323" key="GridCell.Tab.0.right/0.23.1440.798@0.23.1440.798" timestamp="1603182732977" />
+    <state width="1419" height="322" key="GridCell.Tab.0.right/0.23.1440.801@0.23.1440.801" timestamp="1602690433522" />
+    <state x="421" y="176" width="598" height="492" key="find.popup" timestamp="1603149367801">
+      <screen x="0" y="23" width="1440" height="798" />
     </state>
-    <state x="421" y="175" width="598" height="490" key="find.popup/0.23.1440.795@0.23.1440.795" timestamp="1602570241989" />
+    <state x="421" y="175" width="598" height="490" key="find.popup/0.23.1440.795@0.23.1440.795" timestamp="1603144514535" />
+    <state x="421" y="176" width="598" height="492" key="find.popup/0.23.1440.798@0.23.1440.798" timestamp="1603149367801" />
   </component>
 </project>

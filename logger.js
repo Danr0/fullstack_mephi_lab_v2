@@ -1,4 +1,4 @@
-const logFile = './logs/server.log';
+const logFile = './server.log';
 const fs = require('fs');
 const ipv6Prefix = "::ffff:";
 

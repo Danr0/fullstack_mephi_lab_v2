@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport = require('../pass').passport;
-const updateData = require('../database').updateData;
+const db = require('../database');
 
 const logger = require('../logger');
 const {
@@ -68,7 +68,7 @@ router.get('/settings', passport.authenticate('cookie', {
 router.post('/settings', passport.authenticate('cookie', {
     failureRedirect: '/login',
     failureFlash: true
-}), updateData, function (req, res) {
+}), db.updateData, function (req, res) {
     res.render('settings.hbs');
 });
 
@@ -77,6 +77,114 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
+
+router.get('/profile', passport.authenticate('cookie', {
+    failureRedirect: '/login',
+    failureFlash: {message: "You should authorize to access this page"}
+}), function (req, res) {
+    res.render('profile.hbs', {
+        username: req.user.username,
+        is_admin: req.user.is_admin.toString()
+    })
+});
+
+// read bu id
+router.get('/api', passport.authenticate('cookie', {
+    failureRedirect: '/login',
+    failureFlash: {message: "You should authorize to access this page"}
+}), function (req, res) {
+    if(req.query.id){
+        db.findUserById(req.query.id).then(user => {
+            if (user !== undefined && user !== null)
+                res.json({success:true,username:user.username,is_admin:user.is_admin});
+            else
+                res.json({success:false,message:"user not found"})
+        })
+            .catch(e => res.json({success:false,message:e.toString()}));
+    }
+    else
+        res.json({success:false,message:"id is required"});
+});
+
+// register
+router.post('/api',  function (req, res) {
+    if(!req.body.username || !req.body.password)
+        res.json({success:false,message:"username and password are required"});
+    let username = req.body.username;
+    let password = req.body.password;
+    db.isUserExist(username).then(exist => {
+        if (exist) {
+            res.json({success:false,message: "User already exist"});
+        } else {
+            db.createNewUser(username, password).then(user => {
+                res.json({success: true});
+            }).catch(e => {
+                res.json({success:false,message: e.toString()});
+            });
+        }
+    }).catch(e => {
+        res.json({success:false,message: e.toString()});
+    });
+});
+
+//edit
+router.put('/api', passport.authenticate('cookie', {
+    failureRedirect: '/login',
+    failureFlash: {message: "You should authorize to access this page"}
+}), function (req, res) {
+    let id = req.user.id;
+    if(req.query.id)
+        id = req.query.id;
+    let password = req.body.password;
+    console.log(password);
+    if(password){
+        if(id === req.user.id || req.user.is_admin){
+            db.isUserExistById(id).then(exist => {
+                if (exist){
+                    db.updateDataById(id,password)
+                        .then(user =>
+                            res.json({success:true}))
+                        .catch(e =>
+                            res.json({success:false,message:e.toString()})
+                        )
+                } else
+                    res.json({success:false,message:"user not found"})}
+            ).catch(e => res.json({success:false,message:e.toString()}));
+        }
+        else
+            res.json({success:false,message: "Invalid id"});
+    }
+    else
+        res.json({success:false,message: "Password is required"});
+
+
+});
+
+//delete
+router.delete('/api', passport.authenticate('cookie', {
+    failureRedirect: '/login',
+    failureFlash: {message: "You should authorize to access this page"}
+}), function (req, res) {
+    if(req.user.is_admin){
+        if(req.query.id){
+            db.findUserById(req.query.id).then(user => {
+                if (user !== undefined && user !== null){
+                    db.deleteUserById(req.query.id).then(u =>
+                        res.json({success:true}))
+                        .catch(e =>
+                            res.json({success:false,message:e.toString()}))
+                }
+                else
+                    res.json({success:false,message:"user not found"})
+            })
+                .catch(e => res.json({success:false,message:e.toString()}));
+        }
+        else
+            res.json({success:false,message:"id is required"});
+    } else
+        res.json({success:false,message:"only for admins"});
+
+});
 
 //==============Error handle and logging===========================
 

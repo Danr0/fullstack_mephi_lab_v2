@@ -56,7 +56,7 @@ const registerStrategy = new LocalStrategy({
             if (res) {
                 return done(null, false, {message: "User already exist"});
             } else {
-                createNewUser(username, password, req.body.phone_number, req.body.gender, req.body.description).then(function (newUser) {
+                createNewUser(username, password).then(function (newUser) {
                     return done(null, newUser);
                 }).catch(e => {
                     return done(null, false, {message: "Error : " + e});
