@@ -5,6 +5,8 @@ services:
     build: ./
     image: web_development_docker_application
     command: npm run start.dev
+    environment:
+      - BURP_HOST=host.docker.internal:1337
     depends_on:
       - database
     ports:

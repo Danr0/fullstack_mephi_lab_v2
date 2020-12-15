@@ -1,6 +1,15 @@
 const router = require('express').Router();
 const passport = require('../pass').passport;
 const db = require('../database');
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+let local_host = 'localhost:1337';
+if (process.env.BURP_HOST) {
+    // will work this way on only MAC!!!
+    local_host = process.env.BURP_HOST; // for docker to connect to host
+}
+
+let key = '/OBjN20fycNr77DOUz5Pi9fiiuTZUv3gX'
 
 const logger = require('../logger');
 const {
@@ -13,7 +22,9 @@ const {
 } = require("../httpError");
 
 
+
 router.use(logger.logRequestToConsole);
+
 
 router.get('/', function (req, res) {
     res.render("index.hbs");
@@ -34,6 +45,7 @@ router.post('/login', passport.authenticate('login', {
     failureFlash: true
 }));
 
+/*
 router.get('/register', function (req, res) {
     let message = req.flash();
 
@@ -87,12 +99,12 @@ router.get('/profile', passport.authenticate('cookie', {
         is_admin: req.user.is_admin.toString()
     })
 });
+ */
+
+
 
 // read bu id
-router.get('/api', passport.authenticate('cookie', {
-    failureRedirect: '/login',
-    failureFlash: {message: "You should authorize to access this page"}
-}), function (req, res) {
+router.get('/api/users', passport.authenticate('cookie'), function (req, res) {
     if(req.query.id){
         db.findUserById(req.query.id).then(user => {
             if (user !== undefined && user !== null)
@@ -107,7 +119,7 @@ router.get('/api', passport.authenticate('cookie', {
 });
 
 // register
-router.post('/api',  function (req, res) {
+router.post('/api/register',  function (req, res) {
     if(!req.body.username || !req.body.password)
         res.json({success:false,message:"username and password are required"});
     let username = req.body.username;
@@ -128,10 +140,7 @@ router.post('/api',  function (req, res) {
 });
 
 //edit
-router.put('/api', passport.authenticate('cookie', {
-    failureRedirect: '/login',
-    failureFlash: {message: "You should authorize to access this page"}
-}), function (req, res) {
+router.put('/api/users', passport.authenticate('cookie'), function (req, res) {
     let id = req.user.id;
     if(req.query.id)
         id = req.query.id;
@@ -161,10 +170,7 @@ router.put('/api', passport.authenticate('cookie', {
 });
 
 //delete
-router.delete('/api', passport.authenticate('cookie', {
-    failureRedirect: '/login',
-    failureFlash: {message: "You should authorize to access this page"}
-}), function (req, res) {
+router.delete('/api/users', passport.authenticate('cookie'), function (req, res) {
     if(req.user.is_admin){
         if(req.query.id){
             db.findUserById(req.query.id).then(user => {
@@ -185,6 +191,62 @@ router.delete('/api', passport.authenticate('cookie', {
         res.json({success:false,message:"only for admins"});
 
 });
+
+
+router.get('/api/base', function (req, res) {
+    let url ='http://'+local_host+key+'/v0.1/knowledge_base/issue_definitions';
+
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send( null );
+    res.send(xmlHttp.responseText);
+
+});
+
+router.get('/api/scan', function (req, res) {
+    let help = "{" +
+        "  \"urls\": [String],\n" +
+        "  \"name\": String,                           // defaults to: null\n" +
+        "  \"scope\": Scope,                           // defaults to: null\n" +
+        "  \"application_logins\": [ApplicationLogin], // defaults to: []\n" +
+        "  \"scan_configurations\": [Configuration],   // defaults to: []\n" +
+        "  \"resource_pool\": String,                  // defaults to: null\n" +
+        "  \"scan_callback\": Callback                 // defaults to: null\n" +
+        "}";
+
+    res.send(JSON.stringify({"data":help}));
+});
+
+router.post('/api/scan', function (req, res) {
+    let url ='http://'+local_host+key+'/v0.1/scan';
+
+    //console.log(req.data);
+    let data = req.body;//{"urls":["http://google.com"]}
+    console.log(JSON.stringify(data))
+    //res.send(data.toString());
+
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", url, false ); // false for synchronous request
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send( JSON.stringify(data) );
+    console.log(xmlHttp.responseText);
+    res.send(JSON.stringify({"data":xmlHttp.responseText}));
+
+
+
+});
+
+router.get('/api/scan/:id', function (req, res) {
+
+    let url ='http://'+local_host+key+'/v0.1/scan/'+req.params.id;
+
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false );
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send();
+    res.send(xmlHttp.responseText);
+})
 
 //==============Error handle and logging===========================
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const hbs = require("hbs");
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 const passport = require("passport");
 const flash = require("connect-flash");
 const cookieSession = require('cookie-session');
@@ -33,8 +33,9 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json())
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(routes);
 

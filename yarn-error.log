@@ -1,0 +1,74 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add XMLHttpRequest
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/d.pogonin/WebstormProjects/Web_development_docker/node_modules/.bin:/opt/metasploit-framework/bin:/opt/metasploit-framework/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  12.18.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/XMLHttpRequest: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
+      at Request.emit (events.js:315:20)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
+      at Request.emit (events.js:315:20)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
+      at Object.onceWrapper (events.js:421:28)
+      at IncomingMessage.emit (events.js:327:22)
+      at endReadableNT (_stream_readable.js:1220:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+
+npm manifest: 
+  {
+    "name": "docker_node",
+    "version": "1.0.0",
+    "description": "Simple node server",
+    "main": "index.js",
+    "scripts": {
+      "start.dev": "sequelize-cli db:migrate && nodemon -L",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "onlyweb": "nodemon -L"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/Danr0/fullstack_mephi_lab_v2.git"
+    },
+    "author": "Danr0",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/Danr0/fullstack_mephi_lab_v2/issues"
+    },
+    "dependencies": {
+      "bcrypt": "^5.0.0",
+      "body-parser": "^1.19.0",
+      "connect-flash": "^0.1.1",
+      "cookie-parser": "^1.4.5",
+      "cookie-session": "^1.4.0",
+      "express": "^4.17.1",
+      "hbs": "^4.1.1",
+      "passport": "^0.4.1",
+      "passport-cookie": "^1.0.8",
+      "passport-local": "^1.0.0",
+      "pg": "^8.4.1",
+      "pg-hstore": "^2.3.3",
+      "sequelize": "^6.3.5"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.4",
+      "sequelize-cli": "^6.2.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
